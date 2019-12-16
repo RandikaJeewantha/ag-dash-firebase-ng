@@ -9,6 +9,11 @@ import { RouterModule } from '@angular/router';
 import { TopCardComponent } from './widgets/top-card/top-card.component';
 import { TemperatureComponent } from './widgets/temperature/temperature.component';
 import { HighchartsChartModule} from 'highcharts-angular';
+import { HeightComponent } from './widgets/height/height.component';
+import { ECComponent } from './widgets/ec/ec.component';
+import { HumidityComponent } from './widgets/humidity/humidity.component';
+import { PhComponent } from './widgets/ph/ph.component';
+import { LightComponent } from './widgets/light/light.component'
 
 @NgModule({
   declarations: [
@@ -16,7 +21,12 @@ import { HighchartsChartModule} from 'highcharts-angular';
     FooterComponent,
     SidebarComponent,
     TopCardComponent,
-    TemperatureComponent
+    TemperatureComponent,
+    HeightComponent,
+    ECComponent,
+    HumidityComponent,
+    PhComponent,
+    LightComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +47,12 @@ import { HighchartsChartModule} from 'highcharts-angular';
     FooterComponent,
     SidebarComponent,
     TopCardComponent,
-    TemperatureComponent
+    TemperatureComponent,
+    HumidityComponent,
+    PhComponent,
+    HeightComponent,
+    ECComponent,
+    LightComponent
   ]
 })
 export class SharedModule { }
