@@ -2,12 +2,42 @@
 
 <br><br>
 
-<app-temperature></app-temperature>
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
 
-<app-humidity></app-humidity>
+    <mat-card fxFlex="50">
+        <app-temperature></app-temperature>
+    </mat-card>
 
-<app-light></app-light>
+    <mat-card fxFlex="50">
+        <app-humidity></app-humidity>
+    </mat-card>
 
-<app-height></app-height>
+</div>
 
-<app-ph></app-ph>
+<br><br>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+
+    <mat-card fxFlex="50">
+        <app-light></app-light>
+    </mat-card>
+
+    <mat-card fxFlex="50">
+        <app-height></app-height>
+    </mat-card>
+
+</div>
+
+<br><br>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+
+    <mat-card fxFlex="50">
+        <app-ph></app-ph>
+    </mat-card>
+
+    <mat-card fxFlex="50">
+        <app-ec></app-ec>
+    </mat-card>
+
+</div>
