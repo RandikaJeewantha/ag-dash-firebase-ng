@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as Highcharts from 'highcharts';
-import HC_exporting from 'highcharts/modules/exporting';
+import { Chart } from 'chart.js';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-light',
@@ -8,38 +8,70 @@ import HC_exporting from 'highcharts/modules/exporting';
   styleUrls: ['./light.component.scss']
 })
 export class LightComponent implements OnInit {
+  
+  chart: any;
+  labels: any;
+  data: any;
 
-  chartOptions: {};
+  constructor(db: AngularFireDatabase) {
 
-  Highcharts = Highcharts;
+      var data = [];
+      var labels = [];
+      var timelyData = {};
 
-  constructor() { }
+      var items = db.object('Light/');
+      items.snapshotChanges().subscribe(action => {
+
+          timelyData = action.payload.val();
+
+          let value = timelyData["Value"];
+          let key = timelyData["Time"];
+
+          labels.push(key);
+          data.push(value);
+
+          this.labels = labels;
+          this.data = data;
+
+          this.chart.data.datasets[0].data = this.data;
+          this.chart.data.labels = this.labels;
+          this.chart.update();
+      });
+  }
 
   ngOnInit() {
-    this.chartOptions = {
-      title: {
-        text: 'Logarithmic axis demo'
-      },
 
-      xAxis: {
-        tickInterval: 1,
-        type: 'logarithmic'
-      },
+      Chart.defaults.global.legend.display = false;
 
-      yAxis: {
-        type: 'logarithmic',
-        minorTickInterval: 0.1
-      },
+      this.chart = new Chart('Light', {
 
-      tooltip: {
-        headerFormat: '<b>{series.name}</b><br />',
-        pointFormat: 'x = {point.x}, y = {point.y}'
-      },
+          type: 'line',
 
-      series: [{
-        data: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512],
-        pointStart: 1
-      }]
-    }
+          options: {
+              responsive: true,
+              title: {
+                  display: true,
+                  text: 'Inhouse Light ( Lux )'
+              },
+              elements: {
+                  point: {
+                      radius: null
+                  }
+              },
+          },
+
+          data: {
+
+              datasets: [
+                  {
+                      showLine: true,
+                      type: 'line',
+                      label: 'Light',
+                      fill: 'false',
+                      borderColor: "blue",
+                  }
+              ]
+          }
+      });
   }
 }

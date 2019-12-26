@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as Highcharts from 'highcharts';
-import HC_exporting from 'highcharts/modules/exporting';
+import { Chart } from 'chart.js';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-humidity',
@@ -9,66 +9,83 @@ import HC_exporting from 'highcharts/modules/exporting';
 })
 export class HumidityComponent implements OnInit {
 
-  chartOptions: {};
+  chart: any;
+  labels: any;
+  data: any;
 
-  Highcharts = Highcharts;
+  constructor(db: AngularFireDatabase) {
 
-  constructor() { }
+    var data = [];
+    var labels = [];
+    var timelyData = {};
+
+    var items = db.object('Humidity/');
+    items.snapshotChanges().subscribe(action => {
+
+      timelyData = action.payload.val();
+
+      let value = timelyData["Value"];
+      let key = timelyData["Time"];
+
+      labels.push(key);
+      data.push(value);
+
+      this.labels = labels;
+      this.data = data;
+
+      this.chart.data.datasets[0].data = this.data;
+      this.chart.data.labels = this.labels;
+      this.chart.update();
+
+      console.log(this.data);
+      console.log(this.labels);
+
+    });
+  }
 
   ngOnInit() {
-    this.chartOptions = {
 
-      chart: {
-        type: 'spline',
-        inverted: true
-      },
-      title: {
-        text: 'Atmosphere Temperature by Altitude'
-      },
-      subtitle: {
-        text: 'According to the Standard Atmosphere Model'
-      },
-      xAxis: {
-        reversed: false,
+    Chart.defaults.global.legend.display = false;
+
+    this.chart = new Chart('Humidity', {
+
+      type: 'line',
+
+      options: {
+        responsive: true,
         title: {
-          enabled: true,
-          text: 'Altitude'
+          display: true,
+          text: 'Inhouse Humidity ( % )'
         },
-        labels: {
-          format: '{value} km'
+        hover: {
+          mode: 'label'
         },
-        maxPadding: 0.05,
-        showLastLabel: true
-      },
-      yAxis: {
-        title: {
-          text: 'Temperature'
+        scales: {
+
+          yAxes: [{
+            display: true,
+            ticks: {
+              max: 85,
+              min: 75
+            }
+          }]
         },
-        labels: {
-          format: '{value}°'
-        },
-        lineWidth: 2
       },
-      legend: {
-        enabled: false
-      },
-      tooltip: {
-        headerFormat: '<b>{series.name}</b><br/>',
-        pointFormat: '{point.x} km: {point.y}°C'
-      },
-      plotOptions: {
-        spline: {
-          marker: {
-            enable: false
+
+      data: {
+
+        datasets: [
+          {
+            showLine: true,
+            type: 'line',
+            label: 'Humidity',
+            fill: 'false',
+            backgroundColor: "#eebcde ",
+            borderColor: "blue",
+            borderDash: [5, 5],
           }
-        }
-      },
-      series: [{
-        name: 'Temperature',
-        data: [[0, 15], [10, -50], [20, -56.5], [30, -46.5], [40, -22.1],
-        [50, -2.5], [60, -27.7], [70, -55.7], [80, -76.5]]
-      }]
-    }
-    HC_exporting(Highcharts);
+        ]
+      }
+    });
   }
 }

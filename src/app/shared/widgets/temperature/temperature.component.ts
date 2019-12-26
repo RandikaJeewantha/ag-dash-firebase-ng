@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as Highcharts from 'highcharts';
+import { Chart } from 'chart.js';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
     selector: 'app-temperature',
@@ -8,82 +9,83 @@ import * as Highcharts from 'highcharts';
 })
 export class TemperatureComponent implements OnInit {
 
-    chartOptions: {};
+    chart: any;
+    labels: any;
+    data: any;
 
-    time = new Date();
-    time2 = this.time
+    constructor(db: AngularFireDatabase) {
 
-    Highcharts = Highcharts;
-    
-    constructor() {
-        console.log(this.time);
-        console.log(this.time2); 
+        var data = [];
+        var labels = [];
+        var timelyData = {};
+
+        var items = db.object('Temperature/');
+        items.snapshotChanges().subscribe(action => {
+
+            timelyData = action.payload.val();
+
+            let value = timelyData["Value"];
+            let key = timelyData["Time"];
+
+            labels.push(key);
+            data.push(value);
+
+            this.labels = labels;
+            this.data = data;
+
+            this.chart.data.datasets[0].data = this.data;
+            this.chart.data.labels = this.labels;
+            this.chart.update();
+
+            console.log(this.data);
+            console.log(this.labels);
+
+        });
     }
 
     ngOnInit() {
-        this.chartOptions = {
 
-            chart: {
-                zoomType: 'x'
-            },
-            title: {
-                text: 'InHouse Temperature'
-            },
-            xAxis: {
-                type: 'datetime',
-                labels: {
-                    format: '{value:%H:%m}'
-                  },
+        Chart.defaults.global.legend.display = false;
+
+        this.chart = new Chart('Temperature', {
+
+            type: 'line',
+
+            options: {
+                responsive: true,
                 title: {
-                    text: 'Time'
-                }
-            },
-            yAxis: {
-                title: {
-                    text: 'Temperature ( °C )'
-                }
-            },
-            legend: {
-                enabled: false
-            },
+                    display: true,
+                    text: 'Inhouse Temperature ( °C )'
+                },
+                elements: {
+                    point: {
+                        radius: null
+                    }
+                },
+                scales: {
 
-            exporting: {
-                enabled: false
-             },
-
-            plotOptions: {
-                area: {
-        
-                    fillColor: {
-                        linearGradient: {
-                            x1: 0,
-                            y1: 0,
-                            x2: 0,
-                            y2: 1
-                        },
-                        stops: [
-                            [0, Highcharts.getOptions().colors[0]],
-                            [1, new Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                        ]
-                    },
-                    marker: {
-                        radius: 2
-                    },
-                    lineWidth: 1,
-                    states: {
-                        hover: {
-                            lineWidth: 1
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            max: 30,
+                            min: 20
                         }
-                    },
-                    threshold: null
-                }
+                    }]
+                },
             },
 
-            series: [{
-                name:'Temperature ( °C ) ',
-                type: 'area',
-                data: [["1576673907313",1], ["1576673907313",5], ["1576673907313",85]]
-            }]
-        }
+            data: {
+
+                datasets: [
+                    {
+                        showLine: true,
+                        type: 'line',
+                        label: 'Temperature',
+                        fill: 'origin',
+                        backgroundColor: 'rgba(0, 0, 250, 0.3)',
+                    }
+                ]
+            }
+        });
     }
 }
