@@ -3,17 +3,18 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { MatDividerModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule, MatExpansionModule, MatCardModule } from '@angular/material';
+import { MatDividerModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule, MatExpansionModule, MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { TopCardComponent } from './widgets/top-card/top-card.component';
 import { TemperatureComponent } from './widgets/temperature/temperature.component';
-import { HighchartsChartModule} from 'highcharts-angular';
 import { HeightComponent } from './widgets/height/height.component';
 import { ECComponent } from './widgets/ec/ec.component';
 import { HumidityComponent } from './widgets/humidity/humidity.component';
 import { PhComponent } from './widgets/ph/ph.component';
-import { LightComponent } from './widgets/light/light.component'
+import { LightComponent } from './widgets/light/light.component';
+import { MTopCardComponent } from './modifires/m-top-card/m-top-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LightComponent } from './widgets/light/light.component'
     ECComponent,
     HumidityComponent,
     PhComponent,
-    LightComponent
+    LightComponent,
+    MTopCardComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,9 @@ import { LightComponent } from './widgets/light/light.component'
     RouterModule,
     MatExpansionModule,
     MatCardModule,
-    HighchartsChartModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     HeaderComponent,
@@ -52,7 +56,8 @@ import { LightComponent } from './widgets/light/light.component'
     PhComponent,
     HeightComponent,
     ECComponent,
-    LightComponent
+    LightComponent,
+    MTopCardComponent
   ]
 })
 export class SharedModule { }
