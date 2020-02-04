@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { MatDividerModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule, MatExpansionModule, MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatDividerModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule, MatExpansionModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { TopCardComponent } from './widgets/top-card/top-card.component';
@@ -15,6 +15,7 @@ import { PhComponent } from './widgets/ph/ph.component';
 import { LightComponent } from './widgets/light/light.component';
 import { MTopCardComponent } from './modifires/m-top-card/m-top-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MEssentialsCardComponent } from './modifires/m-essentials-card/m-essentials-card.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HumidityComponent,
     PhComponent,
     LightComponent,
-    MTopCardComponent
+    MTopCardComponent,
+    MEssentialsCardComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   exports: [
     HeaderComponent,
@@ -57,7 +60,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeightComponent,
     ECComponent,
     LightComponent,
-    MTopCardComponent
+    MTopCardComponent,
+    MEssentialsCardComponent
   ]
 })
 export class SharedModule { }

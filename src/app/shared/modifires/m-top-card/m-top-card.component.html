@@ -4,7 +4,7 @@
         <div class="card-container">
             <mat-form-field>
                 <input matInput placeholder="No of categories" [formControl]="number1" #category required>
-                <mat-error *ngIf="number1.invalid">{{getErrorMessage()}}</mat-error>
+                <mat-error *ngIf="number1.invalid">{{getErrorMessagenumber1()}}</mat-error>
             </mat-form-field>
 
             <button mat-raised-button color="primary" (click)="Category(category.value)">
@@ -17,7 +17,7 @@
         <div class="card-container">
             <mat-form-field>
                 <input matInput placeholder="No of plants" [formControl]="number2" #plant required>
-                <mat-error *ngIf="number2.invalid">{{getErrorMessage()}}</mat-error>
+                <mat-error *ngIf="number2.invalid">{{getErrorMessagenumber2()}}</mat-error>
             </mat-form-field>
 
             <button mat-raised-button color="primary" (click)="Plant(plant.value)">
@@ -30,7 +30,7 @@
         <div class="card-container">
             <mat-form-field>
                 <input matInput placeholder="No of indicaters" [formControl]="number3" #indicater required>
-                <mat-error *ngIf="number3.invalid">{{getErrorMessage()}}</mat-error>
+                <mat-error *ngIf="number3.invalid">{{getErrorMessagenumber3()}}</mat-error>
             </mat-form-field>
 
             <button mat-raised-button color="primary" (click)="Indicator(indicater.value)">

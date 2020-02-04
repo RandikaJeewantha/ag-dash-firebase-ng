@@ -1,0 +1,50 @@
+<mat-card fxFlex="50">
+    <h3>Essentials</h3>
+
+    <div class="card-container">
+        <!-- <mat-form-field>
+            <mat-select placeholder="Plant" [formControl]="plant" #plant required [(value)]="selected">
+                <mat-option value="plant1">plant1</mat-option>
+                <mat-option value="plant2">plant2</mat-option>
+                <mat-option value="plant3">plant3</mat-option>
+            </mat-select>
+            <mat-error *ngIf="plant.invalid">{{getErrorMessageplant()}}</mat-error>
+        </mat-form-field>
+        <p>You selected: {{selected}}</p> -->
+
+        <mat-form-field>
+            <input matInput placeholder="Temperature ( °C )" [formControl]="temp" #temp>
+            <mat-error *ngIf="temp.invalid">{{getErrorMessagetemp()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Humidity ( % )" [formControl]="hum" #hum>
+            <mat-error *ngIf="hum.invalid">{{getErrorMessagehum()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Light ( Lux )" [formControl]="light" #light>
+            <mat-error *ngIf="light.invalid">{{getErrorMessagelight()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Ph" [formControl]="ph" #ph>
+            <mat-error *ngIf="ph.invalid">{{getErrorMessageph()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Ec" [formControl]="ec" #ec>
+            <mat-error *ngIf="ec.invalid">{{getErrorMessageec()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Height" [formControl]="height" #height>
+            <mat-error *ngIf="height.invalid">{{getErrorMessageheight()}}</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="Issentials( temp.value, hum.value,
+        light.value, ph.value, ec.value, height.value)">
+            <mat-icon>edit</mat-icon> Modify
+        </button>
+    </div>
+</mat-card>

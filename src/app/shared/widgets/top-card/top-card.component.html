@@ -1,15 +1,15 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
 
     <mat-card fxFlex="33">
-        No of categories : 01
+        No of categories : {{ (categories | async)?.value }}
     </mat-card>
 
     <mat-card fxFlex="33">
-        No of Plants : 01
+        No of Plants : {{ (plants | async)?.value }}
     </mat-card>
 
     <mat-card fxFlex="33">
-        No of Indicators : 06
+        No of Indicators : {{ (indicators | async)?.value }}
     </mat-card>
 
 </div>

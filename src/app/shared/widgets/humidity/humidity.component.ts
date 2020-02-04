@@ -64,10 +64,10 @@ export class HumidityComponent implements OnInit {
 
           yAxes: [{
             display: true,
-            ticks: {
-              max: 85,
-              min: 75
-            }
+            // ticks: {
+            //   max: 85,
+            //   min: 75ng 
+            // }
           }]
         },
       },
