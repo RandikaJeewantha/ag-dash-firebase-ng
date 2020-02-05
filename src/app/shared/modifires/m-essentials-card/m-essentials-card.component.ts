@@ -1,85 +1,188 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+export interface Temp { value: string; };
 
 @Component({
   selector: 'app-m-essentials-card',
   templateUrl: './m-essentials-card.component.html',
   styleUrls: ['./m-essentials-card.component.scss']
 })
-export class MEssentialsCardComponent implements OnInit {
+export class MEssentialsCardComponent {
 
-  // plant = new FormControl('', [Validators.required]);
-  temp = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-  hum = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-  light = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-  ph = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-  ec = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-  height = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
+  plant: string;
 
-  // getErrorMessageplant() {
-  //   return this.plant.hasError('required') ? 'You must enter a value':'';
-  // }
+  private tempDoc: AngularFirestoreDocument<Temp>;
+  temp: Observable<Temp>;
 
-  getErrorMessagetemp() {
-    return this.temp.hasError('required') ? 'You must enter a value' :
-      this.temp.hasError('pattern') ? 'Not a valid number' : '';
-  }
+  hum: number;
+  ph: number;
+  ec: number;
+  height: number;
+  light: number;
 
-  getErrorMessagehum() {
-    return this.hum.hasError('required') ? 'You must enter a value' :
-      this.hum.hasError('pattern') ? 'Not a valid number' : '';
-  }
+  temperature = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
+  humidity = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
+  ec_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
+  ph_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
+  light_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
+  height_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
 
-  getErrorMessagelight() {
-    return this.light.hasError('required') ? 'You must enter a value' :
-      this.light.hasError('pattern') ? 'Not a valid number' : '';
-  }
-
-  getErrorMessageph() {
-    return this.ph.hasError('required') ? 'You must enter a value' :
-      this.ph.hasError('pattern') ? 'Not a valid number' : '';
+  PlantSelected(event: any) {
+    this.plant = event.value;
   }
 
   getErrorMessageec() {
-    return this.ec.hasError('required') ? 'You must enter a value' :
-      this.ec.hasError('pattern') ? 'Not a valid number' : '';
+    return this.ec_value.hasError('required') ? 'You must enter a value' :
+      this.ec_value.hasError('pattern') ? 'Not a valid number' : '';
+  }
+
+  getErrorMessagetemperature() {
+    return this.temperature.hasError('required') ? 'You must enter a value' :
+      this.temperature.hasError('pattern') ? 'Not a valid number' : '';
+  }
+
+  getErrorMessagehumidity() {
+    return this.humidity.hasError('required') ? 'You must enter a value' :
+      this.humidity.hasError('pattern') ? 'Not a valid number' : '';
   }
 
   getErrorMessageheight() {
-    return this.height.hasError('required') ? 'You must enter a value' :
-      this.height.hasError('pattern') ? 'Not a valid number' : '';
+    return this.height_value.hasError('required') ? 'You must enter a value' :
+      this.height_value.hasError('pattern') ? 'Not a valid number' : '';
   }
 
-  constructor(public fs: AngularFirestore) { }
+  getErrorMessagelight() {
+    return this.light_value.hasError('required') ? 'You must enter a value' :
+      this.light_value.hasError('pattern') ? 'Not a valid number' : '';
+  }
 
-  Issentials( temp: string, hum: string, light: string, ph: string, ec: string, height: string) {
+  getErrorMessageph() {
+    return this.ph_value.hasError('required') ? 'You must enter a value' :
+      this.ph_value.hasError('pattern') ? 'Not a valid number' : '';
+  }
 
-    if (!(this.temp.hasError('pattern') ||
-      this.hum.hasError('pattern') || this.light.hasError('pattern') ||
-      this.ph.hasError('pattern') || this.ec.hasError('pattern') ||
-      this.height.hasError('pattern'))) {
-      
-        return new Promise<any>((resolve, reject) => {
+  constructor(public fs: AngularFirestore) {
+
+    this.tempDoc = fs.doc<Temp>('essentials/'+this.plant+'Temperature');
+    this.temp = this.tempDoc.valueChanges();
+
+   }
+
+  Temperature(value: string) {
+
+    if (this.plant == undefined){
+      alert("Plant is not selected ! \n Please select one.")
+    }
+    else if (!(this.temperature.hasError('required') || this.temperature.hasError('pattern'))) {
+      return new Promise<any>((resolve, reject) => {
         this.fs
           .collection("essentials")
-          .doc("plants")
-          .update({  
-            Temperature : temp, 
-            Humidity : hum,
-            Light : light, 
-            PH : ph, 
-            EC : ec, 
-            Height : height})
-          .then(res => alert("Successfully Updaded !"), err => reject(err));
+          .doc(this.plant)
+          .update({ Temperature: value })
+          .then(res => alert("successfully updaded " + this.plant + " Temperature count as :  " + value), err => reject(err));
       });
     }
     else {
-      alert("Can't Updaded !");
+      alert("Not a valid number !");
     }
   }
 
-  ngOnInit() {
+  Humidity(value: string) {
+
+    if (this.plant == undefined){
+      alert("Plant is not selected ! \n Please select one.")
+    }
+    else if (!(this.humidity.hasError('required') || this.humidity.hasError('pattern'))) {
+      return new Promise<any>((resolve, reject) => {
+        this.fs
+          .collection("essentials")
+          .doc(this.plant)
+          .update({ Humidity: value })
+          .then(res => alert("successfully updaded " + this.plant + " Humidity count as :  " + value), err => reject(err));
+      });
+    }
+    else {
+      alert("Not a valid number !");
+    }
+  }
+
+  EC(value: string) {
+
+    if (this.plant == undefined){
+      alert("Plant is not selected ! \n Please select one.")
+    }
+    else if (!(this.ec_value.hasError('required') || this.ec_value.hasError('pattern'))) {
+      return new Promise<any>((resolve, reject) => {
+        this.fs
+          .collection("essentials")
+          .doc(this.plant)
+          .update({ EC: value })
+          .then(res => alert("successfully updaded " + this.plant + " EC value as :  " + value), err => reject(err));
+      });
+    }
+    else {
+      alert("Not a valid number !");
+    }
+  }
+
+  PH(value: string) {
+
+    if (this.plant == undefined){
+      alert("Plant is not selected ! \n Please select one.")
+    }
+    else if (!(this.ph_value.hasError('required') || this.ph_value.hasError('pattern'))) {
+      return new Promise<any>((resolve, reject) => {
+        this.fs
+          .collection("essentials")
+          .doc(this.plant)
+          .update({ PH: value })
+          .then(res => alert("successfully updaded " + this.plant + " PH count as :  " + value), err => reject(err));
+      });
+    }
+    else {
+      alert("Not a valid number !");
+    }
+  }
+
+  Light(value: string) {
+
+    if (this.plant == undefined){
+      alert("Plant is not selected ! \n Please select one.")
+    }
+    else if (!(this.light_value.hasError('required') || this.light_value.hasError('pattern'))) {
+      return new Promise<any>((resolve, reject) => {
+        this.fs
+          .collection("essentials")
+          .doc(this.plant)
+          .update({ Light: value })
+          .then(res => alert("successfully updaded " + this.plant + " Light count as :  " + value), err => reject(err));
+      });
+    }
+    else {
+      alert("Not a valid number !");
+    }
+  }
+
+  Height(value: string) {
+
+    if (this.plant == undefined){
+      alert("Plant is not selected ! \n Please select one.")
+    }
+    else if (!(this.height_value.hasError('required') || this.height_value.hasError('pattern'))) {
+      return new Promise<any>((resolve, reject) => {
+        this.fs
+          .collection("essentials")
+          .doc(this.plant)
+          .update({ Height: value })
+          .then(res => alert("successfully updaded " + this.plant + " Height value as :  " + value), err => reject(err));
+      });
+    }
+    else {
+      alert("Not a valid number !");
+    }
   }
 
 }
