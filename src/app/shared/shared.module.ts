@@ -16,6 +16,7 @@ import { LightComponent } from './widgets/light/light.component';
 import { MTopCardComponent } from './modifires/m-top-card/m-top-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MEssentialsCardComponent } from './modifires/m-essentials-card/m-essentials-card.component';
+import { PlantDetailsComponent } from './widgets/plant-details/plant-details.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MEssentialsCardComponent } from './modifires/m-essentials-card/m-essent
     PhComponent,
     LightComponent,
     MTopCardComponent,
-    MEssentialsCardComponent
+    MEssentialsCardComponent,
+    PlantDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +63,8 @@ import { MEssentialsCardComponent } from './modifires/m-essentials-card/m-essent
     ECComponent,
     LightComponent,
     MTopCardComponent,
-    MEssentialsCardComponent
+    MEssentialsCardComponent,
+    PlantDetailsComponent
   ]
 })
 export class SharedModule { }

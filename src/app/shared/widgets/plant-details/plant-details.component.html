@@ -1,0 +1,38 @@
+<!--
+<mat-card class="top">
+    <h3>Plant Details</h3>
+
+    <div class="card-container" layout="row" flex>
+        <mat-card class="plant">
+            <mat-select placeholder="First Select A Plant" [formControl]="plant" onselect="getdata()">
+                <mat-option value="plant1" selected="true">plant1</mat-option>
+                <mat-option value="plant2">plant2</mat-option>
+                <mat-option value="plant3">plant3</mat-option>
+                <mat-option value="plant4">plant4</mat-option>
+            </mat-select>
+        </mat-card>
+    </div>
+
+-->
+
+    {{plant.value}}
+
+    <div class="details_block">
+        <input type="button" value="xt" placeholder="test">
+    </div>
+
+</mat-card>
+
+<form [formGroup]="profileForm">
+  
+    <label>
+      First Name:
+      <input type="text" formControlName="firstName">
+    </label>
+  
+    <label>
+      Last Name:
+      <input type="text" formControlName="lastName">
+    </label>
+  
+  </form>

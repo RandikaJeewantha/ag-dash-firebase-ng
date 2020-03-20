@@ -9,7 +9,7 @@ export class AppComponent implements OnInit {
   
   sideBarOpen = true;
 
-  constructor() { }
+  constructor(  ) { }
 
   ngOnInit() {}
 

@@ -9,6 +9,7 @@ import { AuthGuard } from './shared/services/auth/auth.guard';
 import { SecureInnerPagesGuard } from './shared/services/auth/secure-inner-pages.guard';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { SettingsComponent } from './modules/settings/settings.component';
+import { AnalysisComponent } from './modules/analysis/analysis.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/sign-in', pathMatch: 'full'},
@@ -17,6 +18,7 @@ const routes: Routes = [
     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
+    {path: 'analysis', component: AnalysisComponent, canActivate: [AuthGuard]},
     {path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard]},
     {path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard]}
 ];

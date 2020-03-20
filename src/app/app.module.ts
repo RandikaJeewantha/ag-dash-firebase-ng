@@ -21,6 +21,8 @@ import { MatSidenavModule, MatDividerModule, MatCardModule, MatButtonModule, Mat
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { SettingsComponent } from './modules/settings/settings.component';
+import { AnalysisComponent } from './modules/analysis/analysis.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { SettingsComponent } from './modules/settings/settings.component';
     VerifyEmailComponent,
     DashboardComponent,
     ProfileComponent,
-    SettingsComponent
+    SettingsComponent,
+    AnalysisComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ import { SettingsComponent } from './modules/settings/settings.component';
     FlexLayoutModule,
     MatCardModule,
     MatButtonModule, 
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
