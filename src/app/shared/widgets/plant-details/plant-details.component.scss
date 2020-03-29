@@ -1,10 +1,18 @@
-.plant {
-    background-color: rgb(129, 129, 238);
+.select {
+    width: 60%;
+    background-color: blueviolet;
+    font-size: larger;
+    font-weight: bolder;
     text-align: center;
     color: white;
+    padding: 0.5em;
 }
 
-.details_block {
-    background-color: yellow;
-    display: none;
+button {
+    width: 40%;
+    padding: 0.5em;
 }
+
+// .results {
+    
+// }

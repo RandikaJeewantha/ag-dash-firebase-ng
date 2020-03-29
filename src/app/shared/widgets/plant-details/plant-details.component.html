@@ -1,38 +1,45 @@
-<!--
-<mat-card class="top">
-    <h3>Plant Details</h3>
+<mat-card>
 
-    <div class="card-container" layout="row" flex>
-        <mat-card class="plant">
-            <mat-select placeholder="First Select A Plant" [formControl]="plant" onselect="getdata()">
-                <mat-option value="plant1" selected="true">plant1</mat-option>
-                <mat-option value="plant2">plant2</mat-option>
-                <mat-option value="plant3">plant3</mat-option>
-                <mat-option value="plant4">plant4</mat-option>
-            </mat-select>
-        </mat-card>
+    <h5>Plant Details</h5>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+
+        <mat-select class="select" placeholder="First Select A Plant" #plant>
+            <mat-option value="plant1">plant1</mat-option>
+            <mat-option value="plant2">plant2</mat-option>
+            <mat-option value="plant3">plant3</mat-option>
+            <mat-option value="plant4">plant4</mat-option>
+        </mat-select>
+
+        <button mat-raised-button color="primary" (click)="searched_plant(plant.value)">
+            <mat-icon>search</mat-icon> Search
+        </button>
+
     </div>
 
--->
+    <br><br>
 
-    {{plant.value}}
-
-    <div class="details_block">
-        <input type="button" value="xt" placeholder="test">
+    <div class="results" [ngStyle]="{'display': displays }">
+        <table>
+            <thead>
+                <tr>
+                    <th>Essentials</th>
+                </tr>
+                <tr>
+                    <th>Characteristics</th>
+                    <th>Informaitions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Height</td>
+                    <td>50</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <td>......................</td>
+            </tfoot>
+        </table>
     </div>
 
 </mat-card>
-
-<form [formGroup]="profileForm">
-  
-    <label>
-      First Name:
-      <input type="text" formControlName="firstName">
-    </label>
-  
-    <label>
-      Last Name:
-      <input type="text" formControlName="lastName">
-    </label>
-  
-  </form>
