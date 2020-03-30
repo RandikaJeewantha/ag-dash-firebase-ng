@@ -1,0 +1,78 @@
+<div class="example-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+
+      <!-- Time Duration Column -->
+      <ng-container matColumnDef="Time_Duration">
+        <th mat-header-cell *matHeaderCellDef> Time Duration </th>
+        <td mat-cell *matCellDef="let element"> {{element.Time_Duration}} </td>
+      </ng-container>
+  
+      <!-- Temperature Column -->
+      <ng-container matColumnDef="Temperature">
+        <th mat-header-cell *matHeaderCellDef> Temperature </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-form-field class="inputfield">
+                <input matInput placeholder="{{element.Temperature}}" [formControl]="temp" #temp required>
+                <mat-error *ngIf="temp.invalid">{{getErrorMessagetemp()}}</mat-error>
+            </mat-form-field> 
+            
+            <button mat-raised-button  (click)="Height(height.value)">
+                <mat-icon>edit</mat-icon>
+            </button>
+
+        </td>
+      </ng-container>
+  
+      <!-- Humidity Column -->
+      <ng-container matColumnDef="Humidity">
+        <th mat-header-cell *matHeaderCellDef> Humidity </th>
+        <td mat-cell *matCellDef="let element"> {{element.Humidity}} </td>
+      </ng-container>
+
+      <!-- Electric_Conductivity Column -->
+      <ng-container matColumnDef="Electric_Conductivity">
+        <th mat-header-cell *matHeaderCellDef> Electric Conductivity </th>
+        <td mat-cell *matCellDef="let element"> {{element.Electric_Conductivity}} </td>
+      </ng-container>
+
+      <!-- PH_Value Column -->
+      <ng-container matColumnDef="PH_Value">
+        <th mat-header-cell *matHeaderCellDef> PH Value </th>
+        <td mat-cell *matCellDef="let element"> {{element.PH_Value}} </td>
+      </ng-container>
+
+      <!-- Light Column -->
+      <ng-container matColumnDef="Light">
+        <th mat-header-cell *matHeaderCellDef> Light </th>
+        <td mat-cell *matCellDef="let element"> {{element.Light}} </td>
+      </ng-container>
+  
+      <!-- Height Column -->
+      <ng-container matColumnDef="Height">
+        <th mat-header-cell *matHeaderCellDef> Height</th>
+        <td mat-cell *matCellDef="let element"> {{element.Height}} </td>
+      </ng-container>
+
+      <!-- Modify Column -->
+      <ng-container matColumnDef="Modify">
+        <th mat-header-cell *matHeaderCellDef> Modify </th>
+        <td mat-cell *matCellDef="let element"> {{element.Modify}} </td>
+      </ng-container>
+
+      <!-- Delete Column -->
+      <ng-container matColumnDef="Delete">
+        <th mat-header-cell *matHeaderCellDef> Delete</th>
+        <td mat-cell *matCellDef="let element"> {{element.Delete}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  

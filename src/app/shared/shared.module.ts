@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { MatDividerModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule, MatExpansionModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
+import { MatDividerModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule, MatExpansionModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule} from '@angular/material';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { TopCardComponent } from './widgets/top-card/top-card.component';
@@ -17,6 +17,7 @@ import { MTopCardComponent } from './modifires/m-top-card/m-top-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MEssentialsCardComponent } from './modifires/m-essentials-card/m-essentials-card.component';
 import { PlantDetailsComponent } from './widgets/plant-details/plant-details.component';
+import { EssentialTableComponent } from './modifires/essential-table/essential-table.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PlantDetailsComponent } from './widgets/plant-details/plant-details.com
     LightComponent,
     MTopCardComponent,
     MEssentialsCardComponent,
-    PlantDetailsComponent
+    PlantDetailsComponent,
+    EssentialTableComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,8 @@ import { PlantDetailsComponent } from './widgets/plant-details/plant-details.com
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
   ],
   exports: [
     HeaderComponent,
@@ -64,7 +67,8 @@ import { PlantDetailsComponent } from './widgets/plant-details/plant-details.com
     LightComponent,
     MTopCardComponent,
     MEssentialsCardComponent,
-    PlantDetailsComponent
+    PlantDetailsComponent,
+    EssentialTableComponent
   ]
 })
 export class SharedModule { }
