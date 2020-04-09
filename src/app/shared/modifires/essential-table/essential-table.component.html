@@ -16,17 +16,7 @@
       <!-- Temperature Column -->
       <ng-container matColumnDef="Temperature">
         <th mat-header-cell *matHeaderCellDef> Temperature </th>
-        <td mat-cell *matCellDef="let element">
-            <mat-form-field class="inputfield">
-                <input matInput placeholder="{{element.Temperature}}" [formControl]="temp" #temp required>
-                <mat-error *ngIf="temp.invalid">{{getErrorMessagetemp()}}</mat-error>
-            </mat-form-field> 
-            
-            <button mat-raised-button  (click)="Height(height.value)">
-                <mat-icon>edit</mat-icon>
-            </button>
-
-        </td>
+        <td mat-cell *matCellDef="let element"> {{element.Temperature}} </td>
       </ng-container>
   
       <!-- Humidity Column -->
