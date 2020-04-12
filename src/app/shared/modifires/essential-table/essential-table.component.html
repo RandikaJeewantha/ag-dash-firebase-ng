@@ -1,68 +1,63 @@
-<div class="example-container mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
-  
-      <!-- Position Column -->
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-      </ng-container>
+<mat-card class="background">
 
-      <!-- Time Duration Column -->
-      <ng-container matColumnDef="Time_Duration">
-        <th mat-header-cell *matHeaderCellDef> Time Duration </th>
-        <td mat-cell *matCellDef="let element"> {{element.Time_Duration}} </td>
-      </ng-container>
-  
-      <!-- Temperature Column -->
-      <ng-container matColumnDef="Temperature">
-        <th mat-header-cell *matHeaderCellDef> Temperature </th>
-        <td mat-cell *matCellDef="let element"> {{element.Temperature}} </td>
-      </ng-container>
-  
-      <!-- Humidity Column -->
-      <ng-container matColumnDef="Humidity">
-        <th mat-header-cell *matHeaderCellDef> Humidity </th>
-        <td mat-cell *matCellDef="let element"> {{element.Humidity}} </td>
-      </ng-container>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
 
-      <!-- Electric_Conductivity Column -->
-      <ng-container matColumnDef="Electric_Conductivity">
-        <th mat-header-cell *matHeaderCellDef> Electric Conductivity </th>
-        <td mat-cell *matCellDef="let element"> {{element.Electric_Conductivity}} </td>
-      </ng-container>
+    <mat-select class="select" placeholder="First Select A Plant" #plant>
+      <mat-option value="plant1">plant1</mat-option>
+      <mat-option value="plant2">plant2</mat-option>
+      <mat-option value="plant3">plant3</mat-option>
+      <mat-option value="plant4">plant4</mat-option>
+    </mat-select>
 
-      <!-- PH_Value Column -->
-      <ng-container matColumnDef="PH_Value">
-        <th mat-header-cell *matHeaderCellDef> PH Value </th>
-        <td mat-cell *matCellDef="let element"> {{element.PH_Value}} </td>
-      </ng-container>
+    <button mat-raised-button color="primary" (click)="searched_plant(plant.value)">
+      <mat-icon>search</mat-icon> Search
+    </button>
 
-      <!-- Light Column -->
-      <ng-container matColumnDef="Light">
-        <th mat-header-cell *matHeaderCellDef> Light </th>
-        <td mat-cell *matCellDef="let element"> {{element.Light}} </td>
-      </ng-container>
-  
-      <!-- Height Column -->
-      <ng-container matColumnDef="Height">
-        <th mat-header-cell *matHeaderCellDef> Height</th>
-        <td mat-cell *matCellDef="let element"> {{element.Height}} </td>
-      </ng-container>
-
-      <!-- Modify Column -->
-      <ng-container matColumnDef="Modify">
-        <th mat-header-cell *matHeaderCellDef> Modify </th>
-        <td mat-cell *matCellDef="let element"> {{element.Modify}} </td>
-      </ng-container>
-
-      <!-- Delete Column -->
-      <ng-container matColumnDef="Delete">
-        <th mat-header-cell *matHeaderCellDef> Delete</th>
-        <td mat-cell *matCellDef="let element"> {{element.Delete}} </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
   </div>
-  
+
+  <br>
+
+  <div class="example-container mat-elevation-z8 table" [ngStyle]="{'display': displays }">
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Temperature</th>
+            <th scope="col">Humidity</th>
+            <th scope="col">EC Value</th>
+            <th scope="col">PH Value</th>
+            <th scope="col">Light</th>
+            <th scope="col">Height</th>
+            <th scope="col">Modify</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of plantdataset">
+            <td>{{data.Start_Date}}</td>
+            <td>{{data.End_Date}}</td>
+            <td>{{data.Temperature}}</td>
+            <td>{{data.Humidity}}</td>
+            <td>{{data.EC_Value}}</td>
+            <td>{{data.PH_Value}}</td>
+            <td>{{data.Light}}</td>
+            <td>{{data.Height}}</td>
+            <td><button mat-button (click)="openDialogModify(data)">Edit</button></td>
+            <td><button mat-button (click)="openDialogDelete(data)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <br>
+
+    <button class="btn-primary add" mat-button (click)="openDialog(element.Start_Time)">Add New Data</button>
+
+    <br><br>
+
+  </div>
+
+</mat-card>

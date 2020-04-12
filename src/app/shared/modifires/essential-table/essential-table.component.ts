@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MEssentialsModifyComponent } from '../m-essentials-modify/m-essentials-modify.component';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-essential-table',
@@ -8,30 +10,44 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class EssentialTableComponent {
 
-  displayedColumns =
-      ['position', 'Time_Duration', 'Temperature', 'Humidity', 'Electric_Conductivity', 'PH_Value', 'Light', 'Height', 'Modify', 'Delete'];
-  dataSource = ELEMENT_DATA;
+  displays: string;
+  plant: string;
+  plantdataset = [];
 
-  temp = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-  getErrorMessagetemp() {
-    return this.temp.hasError('required') ? 'You must enter a value' :
-      this.temp.hasError('pattern') ? 'Not a valid number' : '';
+  constructor(public dialog: MatDialog, private afs: AngularFirestore) {
+    this.displays = "none";
+  }
+
+  searched_plant(value: string) {
+
+    if (value == undefined) {
+      this.displays = "none";
+    }
+
+    else {
+
+      this.plant = value;
+
+      this.afs.collection(this.plant).ref.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.plantdataset.push(doc.data());
+        });
+      });
+
+      this.displays = "";
+    }
+
+  }
+
+  openDialogModify(value: any) {
+
+    const dialogRef = this.dialog.open(MEssentialsModifyComponent, {
+      data: {
+        Data: value,
+        plant: this.plant
+      }
+    });
+
   }
 
 }
-
-export interface PeriodicElement {
-  Time_Duration: string;
-  position: number;
-  Temperature: number;
-  Humidity: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, Time_Duration: '2020/02 - 2020/03', Temperature: 1.0079, Humidity: 'H'},
-  {position: 2, Time_Duration: '2020/02 - 2020/03', Temperature: 4.0026, Humidity: 'He'},
-  {position: 3, Time_Duration: '2020/02 - 2020/03', Temperature: 6.941, Humidity: 'Li'},
-  {position: 4, Time_Duration: '2020/02 - 2020/03', Temperature: 9.0122, Humidity: 'Be'},
-  {position: 5, Time_Duration: '2020/02 - 2020/03', Temperature: 10.811, Humidity: 'B'},
-  {position: 6, Time_Duration: '2020/02 - 2020/03', Temperature: 12.0107, Humidity: 'C'}
-];

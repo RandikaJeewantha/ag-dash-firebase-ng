@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MEssentialsCardComponent } from './m-essentials-card.component';
+import { MEssentialsModifyComponent } from './m-essentials-modify.component';
 
 describe('MEssentialsCardComponent', () => {
-  let component: MEssentialsCardComponent;
-  let fixture: ComponentFixture<MEssentialsCardComponent>;
+  let component: MEssentialsModifyComponent;
+  let fixture: ComponentFixture<MEssentialsModifyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MEssentialsCardComponent ]
+      declarations: [ MEssentialsModifyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MEssentialsCardComponent);
+    fixture = TestBed.createComponent(MEssentialsModifyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

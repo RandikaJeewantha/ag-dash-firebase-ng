@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { MatDividerModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule, MatExpansionModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule} from '@angular/material';
+import { MatDividerModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule, MatExpansionModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule, MatDatepickerModule, MatNativeDateModule, MatDialogModule} from '@angular/material';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { TopCardComponent } from './widgets/top-card/top-card.component';
@@ -15,7 +15,7 @@ import { PhComponent } from './widgets/ph/ph.component';
 import { LightComponent } from './widgets/light/light.component';
 import { MTopCardComponent } from './modifires/m-top-card/m-top-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MEssentialsCardComponent } from './modifires/m-essentials-card/m-essentials-card.component';
+import { MEssentialsModifyComponent } from './modifires/m-essentials-modify/m-essentials-modify.component';
 import { PlantDetailsComponent } from './widgets/plant-details/plant-details.component';
 import { EssentialTableComponent } from './modifires/essential-table/essential-table.component';
 
@@ -32,7 +32,7 @@ import { EssentialTableComponent } from './modifires/essential-table/essential-t
     PhComponent,
     LightComponent,
     MTopCardComponent,
-    MEssentialsCardComponent,
+    MEssentialsModifyComponent,
     PlantDetailsComponent,
     EssentialTableComponent
   ],
@@ -52,7 +52,10 @@ import { EssentialTableComponent } from './modifires/essential-table/essential-t
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule
   ],
   exports: [
     HeaderComponent,
@@ -66,9 +69,12 @@ import { EssentialTableComponent } from './modifires/essential-table/essential-t
     ECComponent,
     LightComponent,
     MTopCardComponent,
-    MEssentialsCardComponent,
+    MEssentialsModifyComponent,
     PlantDetailsComponent,
     EssentialTableComponent
-  ]
+  ],
+  entryComponents: [
+    MEssentialsModifyComponent
+  ],
 })
 export class SharedModule { }

@@ -4,10 +4,25 @@
     overflow: auto;
   }
   
-  table {
-    width: 100%;
-  }
+.table {
+  background-color: white;
+}
 
-  .inputfield{
-    width: 50%;
-  }
+.inputfield{
+  width: 50%;
+}
+
+.select {
+    font-size: larger;
+    font-weight: bolder;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.background {
+  background-color: rgba(72, 72, 73,0.1);
+}
+
+* {
+  text-align: center;
+}

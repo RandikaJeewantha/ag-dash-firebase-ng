@@ -1,4 +1,4 @@
-<mat-card class="top">
+<!-- <mat-card class="top">
     <h3>Essentials</h3>
 
     <div class="card-container" layout="row" flex>
@@ -102,4 +102,78 @@
     <br><br>
     <app-essential-table></app-essential-table>
 
-</mat-card>
+</mat-card> -->
+
+<h2 mat-dialog-title>Edit Settings</h2>
+
+<mat-dialog-content class="mat-typography">
+
+    <mat-form-field>
+        <mat-label>Choose a start date</mat-label>
+        <input matInput [matDatepicker]="pickerstart" disabled>
+        <mat-datepicker-toggle matSuffix [for]="pickerstart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerstart disabled="true"></mat-datepicker>
+    </mat-form-field>
+
+    &nbsp; &nbsp; &nbsp; &nbsp;
+
+    <mat-form-field>
+        <mat-label>Choose a end date</mat-label>
+        <input matInput [min]="minDate" [matDatepicker]="pickerend" (dateInput)="enddate($event.value)" disabled>
+        <mat-datepicker-toggle matSuffix [for]="pickerend"></mat-datepicker-toggle>
+        <mat-datepicker #pickerend disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+    &nbsp; &nbsp; &nbsp; &nbsp;
+
+    <mat-form-field>
+        <input matInput placeholder="Temperature" #tem>
+        <!-- <mat-error *ngIf="temperature.invalid">{{getErrorMessagetemperature()}}</mat-error> -->
+    </mat-form-field>
+
+    &nbsp; &nbsp; &nbsp; &nbsp;
+
+    <mat-form-field>
+        <input matInput placeholder="Humidity" #hum>
+        <!-- <mat-error *ngIf="temperature.invalid">{{getErrorMessagetemperature()}}</mat-error> -->
+    </mat-form-field>
+
+    &nbsp; &nbsp; &nbsp; &nbsp;
+
+    <mat-form-field>
+        <input matInput placeholder="EC Value" #ec>
+        <!-- <mat-error *ngIf="temperature.invalid">{{getErrorMessagetemperature()}}</mat-error> -->
+    </mat-form-field>
+
+    &nbsp; &nbsp; &nbsp; &nbsp;
+
+    <mat-form-field>
+        <input matInput placeholder="PH Value" #ph>
+        <!-- <mat-error *ngIf="temperature.invalid">{{getErrorMessagetemperature()}}</mat-error> -->
+    </mat-form-field>
+
+    &nbsp; &nbsp; &nbsp; &nbsp;
+
+    <mat-form-field>
+        <input matInput placeholder="Light" #light>
+        <!-- <mat-error *ngIf="temperature.invalid">{{getErrorMessagetemperature()}}</mat-error> -->
+    </mat-form-field>
+
+    &nbsp; &nbsp; &nbsp; &nbsp;
+
+    <mat-form-field>
+        <input matInput placeholder="Height" #height>
+        <!-- <mat-error *ngIf="temperature.invalid">{{getErrorMessagetemperature()}}</mat-error> -->
+    </mat-form-field>
+
+    <br>
+
+    <button mat-raised-button color="primary" (click)="update(tem.value, hum.value, ec.value, ph.value, light.value, height.value)">
+        <mat-icon>edit</mat-icon> Modify
+    </button>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>EXIT</button>
+</mat-dialog-actions>
