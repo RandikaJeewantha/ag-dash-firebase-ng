@@ -46,7 +46,7 @@
             <td>{{data.Light}}</td>
             <td>{{data.Height}}</td>
             <td><button mat-button (click)="openDialogModify(data)">Edit</button></td>
-            <td><button mat-button (click)="openDialogDelete(data)">Delete</button></td>
+            <td><button mat-button (click)="delete(data.Start_Date)">Delete</button></td>
           </tr>
         </tbody>
       </table>
@@ -54,7 +54,7 @@
 
     <br>
 
-    <button class="btn-primary add" mat-button (click)="openDialog(element.Start_Time)">Add New Data</button>
+    <button class="btn-primary add" mat-button (click)="openDialogAdd()">Add New Data</button>
 
     <br><br>
 

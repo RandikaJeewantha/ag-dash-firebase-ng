@@ -18,6 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MEssentialsModifyComponent } from './modifires/m-essentials-modify/m-essentials-modify.component';
 import { PlantDetailsComponent } from './widgets/plant-details/plant-details.component';
 import { EssentialTableComponent } from './modifires/essential-table/essential-table.component';
+import { DatePipe } from '@angular/common';
+import { MEssentialsAddComponent } from './modifires/m-essentials-add/m-essentials-add.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { EssentialTableComponent } from './modifires/essential-table/essential-t
     MTopCardComponent,
     MEssentialsModifyComponent,
     PlantDetailsComponent,
-    EssentialTableComponent
+    EssentialTableComponent,
+    MEssentialsAddComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +77,11 @@ import { EssentialTableComponent } from './modifires/essential-table/essential-t
     EssentialTableComponent
   ],
   entryComponents: [
-    MEssentialsModifyComponent
+    MEssentialsModifyComponent,
+    MEssentialsAddComponent
   ],
+  providers: [
+    DatePipe
+  ]
 })
 export class SharedModule { }

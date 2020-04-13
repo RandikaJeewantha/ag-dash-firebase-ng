@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MEssentialsModifyComponent } from '../m-essentials-modify/m-essentials-modify.component';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { MEssentialsAddComponent } from '../m-essentials-add/m-essentials-add.component';
 
 @Component({
   selector: 'app-essential-table',
@@ -29,6 +30,7 @@ export class EssentialTableComponent {
       this.plant = value;
 
       this.afs.collection(this.plant).ref.get().then((querySnapshot) => {
+        this.plantdataset.splice(0, this.plantdataset.length);
         querySnapshot.forEach((doc) => {
           this.plantdataset.push(doc.data());
         });
@@ -47,7 +49,23 @@ export class EssentialTableComponent {
         plant: this.plant
       }
     });
-
   }
 
+  openDialogAdd() {
+
+    const dialogRef = this.dialog.open(MEssentialsAddComponent, {
+      data: {
+        plant: this.plant
+      }
+    });
+  }
+
+  delete(id: any) {
+    return new Promise<any>((resolve, reject) => {
+      this.afs
+        .collection(this.plant)
+        .doc(id)
+        .delete().then(res => alert("successfully updaded !"), err => reject(err))
+    });
+  }
 }

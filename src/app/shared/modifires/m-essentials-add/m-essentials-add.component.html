@@ -4,16 +4,16 @@
 
     <mat-form-field>
         <mat-label>Start Date : {{Start_Date}}</mat-label>
-        <input matInput [matDatepicker]="pickerstart" disabled>
+        <input matInput [matDatepicker]="pickerstart" (dateInput)="startdate($event.value)" disabled required>
         <mat-datepicker-toggle matSuffix [for]="pickerstart"></mat-datepicker-toggle>
-        <mat-datepicker #pickerstart disabled="true"></mat-datepicker>
+        <mat-datepicker #pickerstart disabled="false"></mat-datepicker>
     </mat-form-field>
 
     &nbsp; &nbsp; &nbsp; &nbsp;
 
     <mat-form-field>
         <mat-label>End Date: {{End_Date}}</mat-label>
-        <input matInput [min]="minDate" [matDatepicker]="pickerend" (dateInput)="enddate($event.value)" disabled>
+        <input matInput [min]="minDate" [matDatepicker]="pickerend" (dateInput)="enddate($event.value)" disabled required>
         <mat-datepicker-toggle matSuffix [for]="pickerend"></mat-datepicker-toggle>
         <mat-datepicker #pickerend disabled="false"></mat-datepicker>
     </mat-form-field>
@@ -21,48 +21,48 @@
     &nbsp; &nbsp; &nbsp; &nbsp;
 
     <mat-form-field>
-        <input matInput placeholder="Temperature: {{Temperature}}" [formControl]="temperature" #tem>
+        <input matInput placeholder="Temperature: {{Temperature}}" [formControl]="temperature" #tem required>
         <mat-error *ngIf="temperature.invalid">{{getErrorMessagetemperature()}}</mat-error>
     </mat-form-field>
 
     &nbsp; &nbsp; &nbsp; &nbsp;
 
     <mat-form-field>
-        <input matInput placeholder="Humidity: {{Humidity}}" [formControl]="humidity" #hum>
+        <input matInput placeholder="Humidity: {{Humidity}}" [formControl]="humidity" #hum required>
         <mat-error *ngIf="humidity.invalid">{{getErrorMessagehumidity()}}</mat-error>
     </mat-form-field>
 
     &nbsp; &nbsp; &nbsp; &nbsp;
 
     <mat-form-field>
-        <input matInput placeholder="EC Value: {{EC_Value}}" [formControl]="ec_value" #ec>
+        <input matInput placeholder="EC Value: {{EC_Value}}" [formControl]="ec_value" #ec required>
         <mat-error *ngIf="ec_value.invalid">{{getErrorMessageec()}}</mat-error>
     </mat-form-field>
 
     &nbsp; &nbsp; &nbsp; &nbsp;
 
     <mat-form-field>
-        <input matInput placeholder="PH Value: {{PH_Value}}" [formControl]="ph_value" #ph>
+        <input matInput placeholder="PH Value: {{PH_Value}}" [formControl]="ph_value" #ph required>
         <mat-error *ngIf="ph_value.invalid">{{getErrorMessageph()}}</mat-error>
     </mat-form-field>
 
     &nbsp; &nbsp; &nbsp; &nbsp;
 
     <mat-form-field>
-        <input matInput placeholder="Light: {{Light}}" [formControl]="light_value" #light>
+        <input matInput placeholder="Light: {{Light}}" [formControl]="light_value" #light required>
         <mat-error *ngIf="light_value.invalid">{{getErrorMessagelight()}}</mat-error>
     </mat-form-field>
 
     &nbsp; &nbsp; &nbsp; &nbsp;
 
     <mat-form-field>
-        <input matInput placeholder="Height: {{Height}}" [formControl]="height_value" #height>
+        <input matInput placeholder="Height: {{Height}}" [formControl]="height_value" #height required>
         <mat-error *ngIf="height_value.invalid">{{getErrorMessageheight()}}</mat-error>
     </mat-form-field>
 
     <br>
 
-    <button mat-raised-button color="primary" (click)="update(tem.value, hum.value, ec.value, ph.value, light.value, height.value)">
+    <button mat-raised-button color="primary" (click)="create(tem.value, hum.value, ec.value, ph.value, light.value, height.value)">
         <mat-icon>edit</mat-icon> Modify
     </button>
 
