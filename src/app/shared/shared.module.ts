@@ -20,6 +20,14 @@ import { PlantDetailsComponent } from './widgets/plant-details/plant-details.com
 import { EssentialTableComponent } from './modifires/essential-table/essential-table.component';
 import { DatePipe } from '@angular/common';
 import { MEssentialsAddComponent } from './modifires/m-essentials-add/m-essentials-add.component';
+import { ContainComponent } from './widgets/analysis/contain/contain.component';
+import { AEcComponent } from './widgets/analysis/a-ec/a-ec.component';
+import { AHeightComponent } from './widgets/analysis/a-height/a-height.component';
+import { AHumidityComponent } from './widgets/analysis/a-humidity/a-humidity.component';
+import { ALightComponent } from './widgets/analysis/a-light/a-light.component';
+import { APhComponent } from './widgets/analysis/a-ph/a-ph.component';
+import { ATemperatureComponent } from './widgets/analysis/a-temperature/a-temperature.component';
+import { AStatusComponent } from './widgets/analysis/a-status/a-status.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +45,15 @@ import { MEssentialsAddComponent } from './modifires/m-essentials-add/m-essentia
     MEssentialsModifyComponent,
     PlantDetailsComponent,
     EssentialTableComponent,
-    MEssentialsAddComponent
+    MEssentialsAddComponent,
+    ContainComponent,
+    AEcComponent,
+    AHeightComponent,
+    AHumidityComponent,
+    ALightComponent,
+    APhComponent,
+    ATemperatureComponent,
+    AStatusComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +90,9 @@ import { MEssentialsAddComponent } from './modifires/m-essentials-add/m-essentia
     MTopCardComponent,
     MEssentialsModifyComponent,
     PlantDetailsComponent,
-    EssentialTableComponent
+    EssentialTableComponent,
+    ContainComponent,
+    AStatusComponent
   ],
   entryComponents: [
     MEssentialsModifyComponent,

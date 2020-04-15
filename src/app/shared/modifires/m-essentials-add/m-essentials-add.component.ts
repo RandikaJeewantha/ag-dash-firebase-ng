@@ -14,12 +14,12 @@ import { Router } from '@angular/router';
 })
 export class MEssentialsAddComponent {
 
-  temperature = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-  humidity = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-  ec_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-  ph_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-  light_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-  height_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
+  temperature = new FormControl('', [Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,3})?$")]);
+  humidity = new FormControl('', [Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,3})?$")]);
+  ec_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,3})?$")]);
+  ph_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,3})?$")]);
+  light_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,3})?$")]);
+  height_value = new FormControl('', [Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,3})?$")]);
 
   getErrorMessageec() {
     return this.ec_value.hasError('required') ? 'You must enter a value' :
