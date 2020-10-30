@@ -46,7 +46,7 @@
             <td>{{data.Light}}</td>
             <td>{{data.Height}}</td>
             <td><button mat-button (click)="openDialogModify(data)">Edit</button></td>
-            <td><button mat-button (click)="delete(data.Start_Date)">Delete</button></td>
+            <td><button mat-button (click)="delete(data.Doc_ID)">Delete</button></td>
           </tr>
         </tbody>
       </table>
@@ -55,6 +55,7 @@
     <br>
 
     <button class="btn-primary add" mat-button (click)="openDialogAdd()">Add New Data</button>
+    <button class="ml-5 btn-primary" mat-button (click)="searched_plant(plant.value)">Refresh</button>
 
     <br><br>
 

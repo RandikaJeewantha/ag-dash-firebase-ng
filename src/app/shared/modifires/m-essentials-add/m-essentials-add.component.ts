@@ -1,11 +1,9 @@
 import { Component, Optional, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable, empty } from 'rxjs';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
-import { EssentialTableComponent } from '../essential-table/essential-table.component';
-import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-m-essentials-add',
@@ -51,11 +49,12 @@ export class MEssentialsAddComponent {
       this.ph_value.hasError('pattern') ? 'Not a valid number' : '';
   }
 
+  dateTime: string;
   plant: string;
   Start_Date: string;
   End_Date: any;
-
-  constructor(private router: Router, private datePipe: DatePipe, public fs: AngularFirestore, public dialogRef: MatDialogRef<MEssentialsAddComponent>,
+  
+  constructor(private datePipe: DatePipe, public fs: AngularFirestore, public dialogRef: MatDialogRef<MEssentialsAddComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.plant = data.plant;
@@ -63,17 +62,34 @@ export class MEssentialsAddComponent {
 
   create(tem: any, hum: any, ec: any, ph: any, light: any, height: any) {
 
+    if (this.Start_Date == null) {
+      swal("Bad Job!", "Start Date is empty !", "error");
+    }
+
+    if (this.End_Date == null) {
+      swal("Bad Job!", "End Date is empty !", "error");
+    }
+
+    if (this.Start_Date > this.End_Date) {
+      swal("Bad Job!", "End Date should be the next days of the Start Date. !", "error");
+    }
+
+    this.dateTime = this.datePipe.transform(new Date().toString(), 'yyyyMMdd-HHmmss');
+
     if (!(this.temperature.hasError('pattern') || this.humidity.hasError('pattern') || this.ec_value.hasError('pattern') ||
       this.ph_value.hasError('pattern') || this.light_value.hasError('pattern') || this.height_value.hasError('pattern')
 
       || this.temperature.hasError('required') || this.humidity.hasError('required') || this.ec_value.hasError('required') ||
-      this.ph_value.hasError('required') || this.light_value.hasError('required') || this.height_value.hasError('required'))) {
+      this.ph_value.hasError('required') || this.light_value.hasError('required') || this.height_value.hasError('required')
+      
+      || this.Start_Date == null || this.End_Date == null || this.Start_Date > this.End_Date )) {
 
       return new Promise<any>((resolve, reject) => {
         this.fs
           .collection(this.plant)
-          .doc(this.Start_Date)
+          .doc(this.dateTime)
           .set({
+            Doc_ID: this.dateTime,
             Start_Date: this.Start_Date,
             End_Date: this.End_Date,
             Height: height,
@@ -83,12 +99,16 @@ export class MEssentialsAddComponent {
             PH_Value: ph,
             Light: light
           })
-          .then(res => alert("successfully added !"), err => reject(err));
+          .then(() => swal("Good Job!", "You Successfully Added!", "success"), err => reject(err))
+          .finally(() => this.dialogRef.close());
       });
+      
     }
+
     else {
-      alert("There are Invalid numbers !");
+      swal("Bad Job!", "There are Invalid Data or Empty Data Found !", "error");
     }
+    
   }
 
   enddate(value: any) {

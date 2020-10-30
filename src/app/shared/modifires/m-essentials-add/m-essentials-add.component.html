@@ -13,7 +13,7 @@
 
     <mat-form-field>
         <mat-label>End Date: {{End_Date}}</mat-label>
-        <input matInput [min]="minDate" [matDatepicker]="pickerend" (dateInput)="enddate($event.value)" disabled required>
+        <input matInput [matDatepicker]="pickerend" (dateInput)="enddate($event.value)" disabled required>
         <mat-datepicker-toggle matSuffix [for]="pickerend"></mat-datepicker-toggle>
         <mat-datepicker #pickerend disabled="false"></mat-datepicker>
     </mat-form-field>
@@ -63,7 +63,7 @@
     <br>
 
     <button mat-raised-button color="primary" (click)="create(tem.value, hum.value, ec.value, ph.value, light.value, height.value)">
-        <mat-icon>edit</mat-icon> Modify
+        <mat-icon>addition</mat-icon> Add New Data
     </button>
 
 </mat-dialog-content>

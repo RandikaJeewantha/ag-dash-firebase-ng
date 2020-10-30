@@ -4,16 +4,16 @@
 
     <mat-form-field>
         <mat-label>Start Date : {{Start_Date}}</mat-label>
-        <input matInput [matDatepicker]="pickerstart" disabled>
+        <input matInput [matDatepicker]="pickerstart" (dateInput)="startdate($event.value)" disabled>
         <mat-datepicker-toggle matSuffix [for]="pickerstart"></mat-datepicker-toggle>
-        <mat-datepicker #pickerstart disabled="true"></mat-datepicker>
+        <mat-datepicker #pickerstart disabled="false"></mat-datepicker>
     </mat-form-field>
 
     &nbsp; &nbsp; &nbsp; &nbsp;
 
     <mat-form-field>
         <mat-label>End Date: {{End_Date}}</mat-label>
-        <input matInput [min]="minDate" [matDatepicker]="pickerend" (dateInput)="enddate($event.value)" disabled>
+        <input matInput [matDatepicker]="pickerend" (dateInput)="enddate($event.value)" disabled>
         <mat-datepicker-toggle matSuffix [for]="pickerend"></mat-datepicker-toggle>
         <mat-datepicker #pickerend disabled="false"></mat-datepicker>
     </mat-form-field>

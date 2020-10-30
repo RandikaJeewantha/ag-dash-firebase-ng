@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MEssentialsModifyComponent } from '../m-essentials-modify/m-essentials-modify.component';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MEssentialsAddComponent } from '../m-essentials-add/m-essentials-add.component';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-essential-table',
@@ -65,7 +66,8 @@ export class EssentialTableComponent {
       this.afs
         .collection(this.plant)
         .doc(id)
-        .delete().then(res => alert("successfully updaded !"), err => reject(err))
+        .delete().then(res => swal("Good Job!", "Successfully Deleted !", "success"), err => reject(err));
+        this.searched_plant(this.plant);
     });
   }
 }

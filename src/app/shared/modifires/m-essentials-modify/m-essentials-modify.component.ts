@@ -1,11 +1,9 @@
 import { Component, Optional, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable, empty } from 'rxjs';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
-import { EssentialTableComponent } from '../essential-table/essential-table.component';
-import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-m-essentials-modify',
@@ -45,7 +43,6 @@ export class MEssentialsModifyComponent {
     return this.ph_value.hasError('pattern') ? 'Not a valid number' : '';
   }
 
-  minDate: Date;
   Data: string;
   plant: string;
   End_Date: string;
@@ -56,15 +53,15 @@ export class MEssentialsModifyComponent {
   PH_Value: string;
   Light: string;
   Start_Date: string;
+  Doc_ID: any;
 
-  constructor(private router: Router, private datePipe: DatePipe, public fs: AngularFirestore, public dialogRef: MatDialogRef<MEssentialsModifyComponent>,
+  constructor(private datePipe: DatePipe, public fs: AngularFirestore, public dialogRef: MatDialogRef<MEssentialsModifyComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.Data = data.Data;
     this.plant = data.plant;
 
-    console.log(this.Data);
-
+    this.Doc_ID = this.Data["Doc_ID"];
     this.Start_Date = this.Data["Start_Date"];
     this.End_Date = this.Data["End_Date"];
     this.Height = this.Data["Height"];
@@ -101,15 +98,20 @@ export class MEssentialsModifyComponent {
       this.Height = height;
     }
 
+    if (this.Start_Date > this.End_Date) {
+      swal("Bad Job!", "End Date should be the next days of the Start Date. !", "error");
+    }
+
     if (!(this.temperature.hasError('pattern') || this.humidity.hasError('pattern') || this.ec_value.hasError('pattern') ||
-    this.ph_value.hasError('pattern') || this.light_value.hasError('pattern') || this.height_value.hasError('pattern') )) {
+    this.ph_value.hasError('pattern') || this.light_value.hasError('pattern') || this.height_value.hasError('pattern') || this.Start_Date > this.End_Date)) {
       
       return new Promise<any>((resolve, reject) => {
 
         this.fs
           .collection(this.plant)
-          .doc(this.Start_Date)
+          .doc(this.Doc_ID)
           .update({
+            Start_Date: this.Start_Date,
             End_Date: this.End_Date,
             Height: this.Height,
             Temperature: this.Temperature,
@@ -119,18 +121,22 @@ export class MEssentialsModifyComponent {
             Light: this.Light
 
           })
-          .then(res => alert("successfully updaded !"), err => reject(err));
+          .then(() => swal("Good Job!", "You Successfully Updaded!", "success"), err => reject(err));
       });
 
     }
     else {
-      alert("There are Invalid numbers !");
+      swal("Bad Job!", "There are Invalid numbers !", "error");
     }
 
   }
 
   enddate(value: any) {
     this.End_Date = this.datePipe.transform(value, 'yyyy-MM-dd');
+  }
+
+  startdate(value: any) {
+    this.Start_Date = this.datePipe.transform(value, 'yyyy-MM-dd');
   }
 
 }
